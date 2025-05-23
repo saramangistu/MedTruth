@@ -17,6 +17,7 @@ Build a binary classifier to identify health-related fake news and support evide
 - Logistic Regression
 - BERT
 - BioBERT
+- RoBERTa
 
 ## ⚙️ Evaluation
 - Accuracy, Precision, Recall, F1
