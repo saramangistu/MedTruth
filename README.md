@@ -1,5 +1,5 @@
 # med-misinfo-detection
-# MedFakeDetect
+# MedTruth
 
 This project focuses on detecting and classifying medical misinformation on social media using NLP.  
 It uses real-world datasets (COVID19-Fake-News, PubHealth, HLR) to train models that classify health claims as true or false.
