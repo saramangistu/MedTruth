@@ -23,7 +23,8 @@ Build a binary classifier to identify health-related fake news and support evide
 - Per-dataset evaluation (COVID, PubHealth, HLR)
 
 ## 📁 Folder Structure
-- 
+- data
+- results
 
 ## 📊 Visual Abstract
 
