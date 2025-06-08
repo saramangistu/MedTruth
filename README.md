@@ -27,5 +27,5 @@ Build a binary classifier to identify health-related fake news and support evide
 
 ## 📊 Visual Abstract
 
-![Visual Abstract](assets/visual_abstract.png)
+![Visual Abstract](visual_abstract.png)
 
