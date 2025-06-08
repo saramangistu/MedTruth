@@ -1,4 +1,3 @@
-# med-misinfo-detection
 # MedTruth
 
 This project focuses on detecting and classifying medical misinformation on social media using NLP.  
