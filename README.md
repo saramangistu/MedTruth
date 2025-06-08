@@ -24,3 +24,8 @@ Build a binary classifier to identify health-related fake news and support evide
 
 ## 📁 Folder Structure
 - 
+
+## 📊 Visual Abstract
+
+![Visual Abstract](assets/visual_abstract.png)
+
