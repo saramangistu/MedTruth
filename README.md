@@ -62,6 +62,8 @@ All models were evaluated using:
 
 ## 🗂️ Folder Structure
 
+'''
+
 MedTruth/
 ├── notebooks/
 │   ├── 1_Synthetic_claim_generation_and_scoring.ipynb
@@ -90,6 +92,8 @@ MedTruth/
 ├── visual_abstract.png
 ├── README.md
 └── requirements.txt
+
+'''
 
 ---
 
