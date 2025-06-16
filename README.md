@@ -62,7 +62,33 @@ All models were evaluated using:
 
 ## 🗂️ Folder Structure
 
-
+📁 MedTruth/
+│
+├── 📁 notebooks/
+│   ├── 1_Synthetic_claim_generation_and_scoring.ipynb
+│   ├── 2_Baseline_models.ipynb
+│   ├── 3_Advanced_models_BERT_BioBERT_RoBERTa.ipynb
+│
+├── 📁 data/
+│   ├── dataset_claims_for_eval.csv
+│   ├── dataset_final_GPTclaims.csv
+│   ├── dataset_final_baseline_data.csv
+│   └── dataset_final_advanced_data.csv
+│
+├── 📁 results/
+│   └── 📁 graphs/
+│       ├── confusion_matrix_BERT.png
+│       ├── confusion_matrix_BioBERT.png
+│       └── ...
+│
+├── 📁 presentations/
+│   ├── MedTruth_Proposal.pdf
+│   ├── MedTruth_Interim.pdf
+│   └── MedTruth_Final.pdf
+│
+├── visual_abstract.png
+├── README.md
+└── requirements.txt
 
 ---
 
