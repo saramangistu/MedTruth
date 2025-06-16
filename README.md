@@ -169,7 +169,7 @@ If you find this project helpful in your research or work, please consider citin
 
 ```
 @misc{medtruth2025,
-  author = {Sara Mangistu},
+  author = {Sara Mangistu, Michelle Zalevsky},
   title = {MedTruth: Detecting Medical Misinformation on Social Media},
   year = {2025},
   howpublished = {\url{https://github.com/saramangistu/MedTruth}},
