@@ -65,13 +65,13 @@ All models were evaluated using:
 ```
 MedTruth/
 ├── notebooks/
-│   ├── 1_Synthetic_claim_generation_and_scoring.ipynb
-│   ├── 2_Baseline_models.ipynb
-│   └── 3_Advanced_models_BERT_BioBERT_RoBERTa.ipynb
+│   ├── Synthetic_claims_generation_and_scoring.ipynb
+│   ├── Baseline_models.ipynb
+│   └── Advanced_models_BERT_BioBERT_RoBERTa.ipynb
 │
 ├── data/
-│   ├── dataset_claims_for_eval.csv
-│   ├── dataset_final_GPTclaims.csv
+│   ├── claims_for_eval.csv
+│   ├── final_GPTclaims.csv
 │   ├── dataset_final_baseline_data.csv
 │   └── dataset_final_advanced_data.csv
 │
