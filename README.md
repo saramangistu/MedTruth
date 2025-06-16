@@ -12,6 +12,12 @@ This project aims to detect and classify **true vs. false health-related claims*
 
 ---
 
+## 🖼️ Visual Abstract
+
+![Visual Abstract](visual_abstract.png)
+
+---
+
 ## 📦 Datasets
 
 ### 🧪 Real datasets:
@@ -57,12 +63,6 @@ All models were evaluated using:
 ## 🗂️ Folder Structure
 
 
-
----
-
-## 🖼️ Visual Abstract
-
-![Visual Abstract](visual_abstract.png)
 
 ---
 
