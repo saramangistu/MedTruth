@@ -93,12 +93,17 @@ MedTruth/
 │   └── dataset_final_advanced_data.csv
 │
 ├── results/
+│   ├── confusion_matrix_BERT.png
+│   ├── confusion_matrix_BioBERT.png
+│   ├── confusion_matrix_RoBERTa.png
+│   ├── confusion_matrix_logistic.png
+│   ├── confusion_matrix_naive_bayes.png
 │   └── graphs/
-│       ├── confusion_matrix_BERT.png
-│       ├── confusion_matrix_BioBERT.png
-│       ├── confusion_matrix_RoBERTa.png
-│       ├── confusion_matrix_logistic.png
-│       └── confusion_matrix_naive_bayes.png
+│       ├── Advanced_label_distribution.png
+│       ├── Baseline_label_distribution.png
+│       ├── Advanced_top_words_true_vs_false.png
+│       ├── Baseline_top_words_true_vs_false.png
+│       └── Baseline_f1_score_comparison.png
 │
 ├── presentations/
 │   ├── MedTruth - Proposal Presentation.pdf
