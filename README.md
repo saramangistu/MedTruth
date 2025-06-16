@@ -89,12 +89,57 @@ MedTruth/
 │   └── MedTruth - Final Presentation.pdf
 │
 ├── visual_abstract.png
-├── README.md
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
+
+---
+
+## 💻 Running the Code
+
+You can run the notebooks either locally or in **Google Colab**.  
+All code was developed and tested in Google Colab ✅
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YourUsername/MedTruth.git
+cd MedTruth
+```
+
+### 2. Install required packages
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🧾 requirements.txt
+
+```
+transformers==4.52.4
+datasets>=3.6.0
+evaluate>=0.4.3
+scikit-learn>=1.4.2
+pandas>=2.2.2
+numpy>=1.26.4
+matplotlib>=3.8.4
+seaborn>=0.13.2
+torch>=2.3.0
+nltk>=3.9.1
+spacy>=3.8.5
+tiktoken>=0.6.0
+kagglehub>=0.1.6
+backoff>=2.2.1
+openai>=1.30.5
+```
+
 ---
 
 ## 🤝 Credits
-- GPT-4-Turbo API access via Azure OpenAI
-- HuggingFace Transformers and Datasets
-- Seaborn & Matplotlib for visualization
+
+- GPT-4-Turbo API access via Azure OpenAI  
+- HuggingFace Transformers and Datasets  
+- Seaborn & Matplotlib for visualization  
+- Developed in Google Colab  
