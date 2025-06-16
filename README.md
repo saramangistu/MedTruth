@@ -1,74 +1,72 @@
 # 🧬 MedTruth: Detecting Medical Misinformation on Social Media
 
-**MedTruth** is a full NLP pipeline for detecting **true vs. false health-related claims** written in the style of **social media posts**. The project combines real-world labeled datasets with **synthetic GPT-4-Turbo-generated claims** to simulate noisy, casual health misinformation, improving robustness and realism. We compare baseline and transformer-based models using HuggingFace and Colab.
+**MedTruth** is an NLP pipeline for detecting and classifying **true vs. false health-related claims** in the style of **social media posts**. This solution combines real-world labeled datasets with **synthetically generated claims** (via GPT-4-Turbo on Azure OpenAI) to improve model generalization, handle noisy language, and simulate real-world online health misinformation.
 
 ---
 
-## 📌 Table of Contents
+## 🎯 Goal
 
-- [🎯 Project Goal](#-project-goal)
-- [🧠 Datasets](#-datasets)
-- [🛠️ Models](#-models)
-- [📈 Evaluation](#-evaluation)
-- [📊 Results Summary](#-results-summary)
-- [🧪 Key Insights](#-key-insights)
-- [📁 Project Structure](#-project-structure)
-- [🚀 Quick Start](#-quick-start)
-- [📦 Requirements](#-requirements)
-- [🤝 Credits](#-credits)
+- Build a robust binary classifier to detect **false medical claims** in social media-like text.
+- Improve model robustness by training on **both real and synthetic data**.
+- Compare **baseline classifiers** to **fine-tuned transformer models**.
+- Simulate noisy, casual, and emotional phrasing as often seen online.
 
 ---
 
-## 🎯 Project Goal
+## 🖼️ Visual Abstract
 
-- Build a robust binary classifier for detecting **false medical claims** from social media-style texts.
-- Leverage both **real-world datasets** and **LLM-generated synthetic claims** to enhance coverage.
-- Evaluate performance across several models from classical ML to transformer-based LLMs.
-- Explore robustness to casual phrasing, misinformation patterns, and low-resource domains.
+![Visual Abstract](visual_abstract.png)
 
 ---
 
-## 🧠 Datasets
+## 📦 Datasets
 
 ### 🧪 Real Datasets
 - [COVID19 Fake News Dataset](https://www.kaggle.com/datasets/elvinagammed/covid19-fake-news-dataset-nlp)
 - [PubHealth Dataset](https://www.kaggle.com/datasets/ersindemirel/pubhealthdataset)
 - [HLR/Misinformation-Detection](https://github.com/HLR/Misinformation-Detection)
 
-➡️ All datasets were filtered to include only samples labeled as `True` or `False`.
+Only samples explicitly labeled as `True` or `False` were retained for training and evaluation.
 
 ### 🧠 Synthetic Dataset
-- Over **2,300 false claims** generated using **GPT-4-Turbo** via Azure OpenAI.
-- Prompts were primed with COVID-style misinformation to generate **realistic**, **plausible**, and **diverse** false medical claims.
-- Claims simulate social media language: informal, noisy, emotional, and sometimes misspelled.
+- Over **2,300 synthetic false claims** generated using **GPT-4-Turbo** (Azure OpenAI).
+- Prompting was guided using COVID-style misinformation to produce diverse, informal, misleading, and plausible health-related posts across various topics.
+- All synthetic claims were written in a social media style: casual tone, emojis, spelling variations, emotional phrasing.
 
 ---
 
 ## 🛠️ Models
 
-### 🔸 Baseline Models (real data only)
+### 🔹 Baseline Models (real data only)
 - TF-IDF + **Naive Bayes**
 - TF-IDF + **Logistic Regression**
 
-### 🔹 Transformer Models (real + synthetic)
+### 🔹 Transformer-Based Models (real + synthetic)
 - **BERT** (`bert-base-uncased`)
 - **BioBERT** (`dmis-lab/biobert-base-cased-v1.1`)
 - **RoBERTa** (`roberta-base`)
 
-All models were fine-tuned using HuggingFace `Trainer`.
+All transformer models were fine-tuned using HuggingFace `Trainer` API with default optimization settings.
 
 ---
 
 ## 📈 Evaluation
 
-- **Metrics**: Accuracy, Precision, Recall, F1-score, Confusion Matrix.
-- Models were evaluated on a **stratified test set**.
-- All transformer models were trained on **combined (real + synthetic)** datasets.
-- Baselines were trained on **real data only**.
+All models were evaluated using the following metrics:
+
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1-score**
+- **Confusion Matrix**
+
+> ⚠️ **Baselines** were trained on real data only.  
+> ✅ **Transformer models** were trained on the **merged (real + synthetic)** dataset.  
+> Stratified train-test splits ensured class balance for fair evaluation.
 
 ---
 
-## 📊 Results Summary
+## 🧪 Results Summary
 
 | Model               | Accuracy | Precision | Recall | F1-score |
 |---------------------|----------|-----------|--------|----------|
@@ -78,18 +76,12 @@ All models were fine-tuned using HuggingFace `Trainer`.
 | BioBERT             | 0.860    | 0.862     | 0.859  | 0.860    |
 | RoBERTa             | **0.875**| **0.874** | **0.879** | **0.876** |
 
----
-
-## 🧪 Key Insights
-
-- ✅ **RoBERTa** outperformed all other models across all metrics.
-- 🔬 Synthetic GPT-4 claims enhanced generalization and robustness.
-- ⚠️ Classical baselines underperformed, especially on identifying false claims.
-- 🔁 Real + synthetic data proved more effective than real-only setups.
+> 🔹 RoBERTa achieved the best overall performance.  
+> 🔸 Classical models showed lower recall, especially for the "False" class.
 
 ---
 
-## 📁 Project Structure
+## 📁 Folder Structure
 
 ```
 MedTruth/
@@ -124,7 +116,10 @@ MedTruth/
 
 ---
 
-## 🚀 Quick Start
+## 💻 Running the Code
+
+You can run the notebooks either locally or in **Google Colab**.  
+All code was developed and tested in Google Colab ✅
 
 ### 1. Clone the repository
 
@@ -139,11 +134,9 @@ cd MedTruth
 pip install -r requirements.txt
 ```
 
-### 3. Run notebooks in Google Colab or locally
-
 ---
 
-## 📦 Requirements
+## 🧾 Requirements
 
 ```
 transformers==4.52.4
@@ -167,7 +160,8 @@ openai>=1.30.5
 
 ## 🤝 Credits
 
-- GPT-4-Turbo access via **Azure OpenAI**
-- Transformer fine-tuning via **HuggingFace**
-- Visualization with **Seaborn** and **Matplotlib**
-- Entire pipeline built in **Google Colab**
+- GPT-4-Turbo API via **Azure OpenAI**
+- Model fine-tuning via **HuggingFace Transformers**
+- Evaluation via **scikit-learn** and **evaluate**
+- Visuals via **Matplotlib** and **Seaborn**
+- Entire pipeline developed in **Google Colab**
