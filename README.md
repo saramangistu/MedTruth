@@ -1,15 +1,14 @@
 # 🧬 MedTruth: Detecting Medical Misinformation on Social Media
 
-**MedTruth** is an NLP pipeline for detecting and classifying **true vs. false health-related claims** in the style of **social media posts**. This solution combines real-world labeled datasets with **synthetically generated claims** (via GPT-4-Turbo on Azure OpenAI) to improve model generalization, handle noisy language, and simulate real-world online health misinformation.
+This project aims to detect and classify **true vs. false health-related claims** in the style of **social media posts** using **Natural Language Processing (NLP)** and **large language models (LLMs)**. The solution combines real-world labeled datasets with synthetically generated claims via GPT-4-Turbo to improve model generalization and robustness.
 
 ---
 
 ## 🎯 Goal
 
-- Build a robust binary classifier to detect **false medical claims** in social media-like text.
-- Improve model robustness by training on **both real and synthetic data**.
-- Compare **baseline classifiers** to **fine-tuned transformer models**.
-- Simulate noisy, casual, and emotional phrasing as often seen online.
+- Build a robust binary classifier to detect **false medical claims** on social media.
+- Evaluate performance on both **real** and **synthetic** data to simulate noisy, casual online text.
+- Leverage **LLMs** (BERT-based) and compare with **baseline models**.
 
 ---
 
@@ -21,48 +20,45 @@
 
 ## 📦 Datasets
 
-### 🧪 Real Datasets
+### 🧪 Real datasets:
 - [COVID19 Fake News Dataset](https://www.kaggle.com/datasets/elvinagammed/covid19-fake-news-dataset-nlp)
 - [PubHealth Dataset](https://www.kaggle.com/datasets/ersindemirel/pubhealthdataset)
 - [HLR/Misinformation-Detection](https://github.com/HLR/Misinformation-Detection)
 
-Only samples explicitly labeled as `True` or `False` were retained for training and evaluation.
+Only samples labeled as `True` or `False` were used.
 
-### 🧠 Synthetic Dataset
-- Over **2,300 synthetic false claims** generated using **GPT-4-Turbo** (Azure OpenAI).
-- Prompting was guided using COVID-style misinformation to produce diverse, informal, misleading, and plausible health-related posts across various topics.
-- All synthetic claims were written in a social media style: casual tone, emojis, spelling variations, emotional phrasing.
+### 🧠 Synthetic dataset:
+- 2,300+ **synthetic false claims** were generated using **GPT-4-Turbo** via Azure OpenAI.
+- Prompts were primed with COVID-related false claims to guide generation of realistic, misleading, and casual health misinformation across diverse topics.
 
 ---
 
 ## 🛠️ Models
 
-### 🔹 Baseline Models (real data only)
-- TF-IDF + **Naive Bayes**
-- TF-IDF + **Logistic Regression**
+### 🔹 Baseline Models
+- **TF-IDF + Naive Bayes**
+- **TF-IDF + Logistic Regression**
 
-### 🔹 Transformer-Based Models (real + synthetic)
-- **BERT** (`bert-base-uncased`)
-- **BioBERT** (`dmis-lab/biobert-base-cased-v1.1`)
-- **RoBERTa** (`roberta-base`)
+### 🔹 Transformer-Based Models
+- **BERT**
+- **BioBERT**
+- **RoBERTa**
 
-All transformer models were fine-tuned using HuggingFace `Trainer` API with default optimization settings.
+All transformers were trained using HuggingFace `Trainer` on the merged dataset (real + synthetic).
 
 ---
 
 ## 📈 Evaluation
 
-All models were evaluated using the following metrics:
+All models were evaluated using:
 
-- **Accuracy**
-- **Precision**
-- **Recall**
-- **F1-score**
+- **Accuracy**, **Precision**, **Recall**, **F1-score**
 - **Confusion Matrix**
 
-> ⚠️ **Baselines** were trained on real data only.  
-> ✅ **Transformer models** were trained on the **merged (real + synthetic)** dataset.  
-> Stratified train-test splits ensured class balance for fair evaluation.
+Evaluations were performed on a stratified test split from the combined dataset.
+
+> 🔸 Note: Baseline models were trained on real data only.  
+> 🔹 Advanced models were trained on **real + synthetic data**.
 
 ---
 
@@ -77,11 +73,11 @@ All models were evaluated using the following metrics:
 | RoBERTa             | **0.875**| **0.874** | **0.879** | **0.876** |
 
 > 🔹 RoBERTa achieved the best overall performance.  
-> 🔸 Classical models showed lower recall, especially for the "False" class.
+> 🔸 Baseline models struggled more with recall on the minority class ("False").
 
 ---
 
-## 📁 Folder Structure
+## 🗂️ Folder Structure
 
 ```
 MedTruth/
@@ -124,7 +120,7 @@ All code was developed and tested in Google Colab ✅
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YourUsername/MedTruth.git
+git clone https://github.com/saramangistu/MedTruth.git
 cd MedTruth
 ```
 
@@ -136,7 +132,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🧾 Requirements
+## 🧾 requirements.txt
 
 ```
 transformers==4.52.4
@@ -158,10 +154,34 @@ openai>=1.30.5
 
 ---
 
+## 🚧 Limitations and Future Work
+
+- The synthetic dataset was generated using GPT-4-Turbo without expert medical validation. Future work could include manual annotation or filtering by healthcare professionals.
+- The current classification is binary (`True` / `False`). Incorporating a stance-aware or multi-class labeling scheme (e.g., "misleading", "partially false", "unverified") may improve granularity.
+- All content is in English. Multilingual support could expand the applicability to global misinformation detection.
+- Model evaluation was performed on balanced test sets. Real-world data may be skewed and require further adaptation strategies.
+
+---
+
+## 📚 Citation
+
+If you find this project helpful in your research or work, please consider citing it:
+
+```
+@misc{medtruth2025,
+  author = {Sara Mangistu},
+  title = {MedTruth: Detecting Medical Misinformation on Social Media},
+  year = {2025},
+  howpublished = {\url{https://github.com/saramangistu/MedTruth}},
+  note = {GitHub repository}
+}
+```
+
+---
+
 ## 🤝 Credits
 
-- GPT-4-Turbo API via **Azure OpenAI**
-- Model fine-tuning via **HuggingFace Transformers**
-- Evaluation via **scikit-learn** and **evaluate**
-- Visuals via **Matplotlib** and **Seaborn**
-- Entire pipeline developed in **Google Colab**
+- GPT-4-Turbo API access via Azure OpenAI  
+- HuggingFace Transformers and Datasets  
+- Seaborn & Matplotlib for visualization  
+- Developed in Google Colab  
