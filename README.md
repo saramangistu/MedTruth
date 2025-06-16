@@ -84,9 +84,9 @@ MedTruth/
 │       └── confusion_matrix_naive_bayes.png
 │
 ├── presentations/
-│   ├── MedTruth_Proposal.pdf
-│   ├── MedTruth_Interim.pdf
-│   └── MedTruth_Final.pdf
+│   ├── MedTruth - Proposal Presentation.pdf
+│   ├── MedTruth - Interim Presentation.pdf
+│   └── MedTruth - Final Presentation.pdf
 │
 ├── visual_abstract.png
 ├── README.md
