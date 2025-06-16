@@ -14,6 +14,8 @@ This project aims to detect and classify **true vs. false health-related claims*
 
 ## 🖼️ Visual Abstract
 
+The following visual abstract summarizes the dataset pipeline, model flow, and evaluation:
+
 ![Visual Abstract](visual_abstract.png)
 
 ---
@@ -25,7 +27,7 @@ This project aims to detect and classify **true vs. false health-related claims*
 - [PubHealth Dataset](https://www.kaggle.com/datasets/ersindemirel/pubhealthdataset)
 - [HLR/Misinformation-Detection](https://github.com/HLR/Misinformation-Detection)
 
-Only samples labeled as `True` or `False` were used.
+Only samples explicitly labeled as `True` or `False` were included, while neutral or unclassified samples were excluded.
 
 ### 🧠 Synthetic dataset:
 - 2,300+ **synthetic false claims** were generated using **GPT-4-Turbo** via Azure OpenAI.
@@ -44,7 +46,7 @@ Only samples labeled as `True` or `False` were used.
 - **BioBERT**
 - **RoBERTa**
 
-Trained using HuggingFace `Trainer` on the merged (real + synthetic) dataset.
+Transformer models were fine-tuned using HuggingFace `Trainer` on the merged dataset (real + synthetic).
 
 ---
 
@@ -54,13 +56,10 @@ All models were evaluated using:
 
 - **Accuracy**, **Precision**, **Recall**, **F1-score**
 - **Confusion Matrix**
-- Evaluations were performed on a stratified test split from the combined dataset.
+- Stratified train-test splits were used for consistent evaluation.
 
-**Note:** Baseline models were trained on real data only. Advanced models were trained on **real + synthetic data**.
-
----
-
----
+> 🔸 Baseline models were trained on real data only.  
+> 🔹 Advanced transformer models were trained on the full dataset including synthetic claims.
 
 ---
 
@@ -74,8 +73,21 @@ All models were evaluated using:
 | BioBERT             | 0.860    | 0.862     | 0.859  | 0.860    |
 | RoBERTa             | **0.875**| **0.874** | **0.879** | **0.876** |
 
-> 🔹 RoBERTa achieved the best overall performance.  
-> 🔸 Baseline models struggled more with recall on the minority class ("False").
+> ✅ RoBERTa achieved the best overall performance.  
+> ⚠️ Baseline models struggled more with recall on the minority class ("False").
+
+---
+
+## ▶️ Notebooks Overview
+
+- `Synthetic_claims_generation_and_scoring.ipynb`  
+  ↪ Generates synthetic false claims using GPT-4-Turbo and evaluates them.
+
+- `Baseline_models.ipynb`  
+  ↪ Trains TF-IDF + Naive Bayes / Logistic Regression models on real claims.
+
+- `Advanced_models_BERT_BioBERT_RoBERTa.ipynb`  
+  ↪ Fine-tunes transformer models on real + synthetic claims and evaluates performance.
 
 ---
 
