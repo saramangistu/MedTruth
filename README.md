@@ -1,69 +1,74 @@
 # 🧬 MedTruth: Detecting Medical Misinformation on Social Media
 
-This project aims to detect and classify **true vs. false health-related claims** in the style of **social media posts** using **Natural Language Processing (NLP)** and **large language models (LLMs)**. The solution combines real-world labeled datasets with synthetically generated claims via GPT-4-Turbo to improve model generalization and robustness.
+**MedTruth** is a full NLP pipeline for detecting **true vs. false health-related claims** written in the style of **social media posts**. The project combines real-world labeled datasets with **synthetic GPT-4-Turbo-generated claims** to simulate noisy, casual health misinformation, improving robustness and realism. We compare baseline and transformer-based models using HuggingFace and Colab.
 
 ---
 
-## 🎯 Goal
+## 📌 Table of Contents
 
-- Build a robust binary classifier to detect **false medical claims** on social media.
-- Evaluate performance on both **real** and **synthetic** data to simulate noisy, casual online text.
-- Leverage **LLMs** (BERT-based) and compare with **baseline models**.
+- [🎯 Project Goal](#-project-goal)
+- [🧠 Datasets](#-datasets)
+- [🛠️ Models](#-models)
+- [📈 Evaluation](#-evaluation)
+- [📊 Results Summary](#-results-summary)
+- [🧪 Key Insights](#-key-insights)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Quick Start](#-quick-start)
+- [📦 Requirements](#-requirements)
+- [🤝 Credits](#-credits)
 
 ---
 
-## 🖼️ Visual Abstract
+## 🎯 Project Goal
 
-The following visual abstract summarizes the dataset pipeline, model flow, and evaluation:
-
-![Visual Abstract](visual_abstract.png)
+- Build a robust binary classifier for detecting **false medical claims** from social media-style texts.
+- Leverage both **real-world datasets** and **LLM-generated synthetic claims** to enhance coverage.
+- Evaluate performance across several models from classical ML to transformer-based LLMs.
+- Explore robustness to casual phrasing, misinformation patterns, and low-resource domains.
 
 ---
 
-## 📦 Datasets
+## 🧠 Datasets
 
-### 🧪 Real datasets:
+### 🧪 Real Datasets
 - [COVID19 Fake News Dataset](https://www.kaggle.com/datasets/elvinagammed/covid19-fake-news-dataset-nlp)
 - [PubHealth Dataset](https://www.kaggle.com/datasets/ersindemirel/pubhealthdataset)
 - [HLR/Misinformation-Detection](https://github.com/HLR/Misinformation-Detection)
 
-Only samples explicitly labeled as `True` or `False` were included, while neutral or unclassified samples were excluded.
+➡️ All datasets were filtered to include only samples labeled as `True` or `False`.
 
-### 🧠 Synthetic dataset:
-- 2,300+ **synthetic false claims** were generated using **GPT-4-Turbo** via Azure OpenAI.
-- Prompts were primed with COVID-related false claims to guide generation of realistic, misleading, and casual health misinformation across diverse topics.
+### 🧠 Synthetic Dataset
+- Over **2,300 false claims** generated using **GPT-4-Turbo** via Azure OpenAI.
+- Prompts were primed with COVID-style misinformation to generate **realistic**, **plausible**, and **diverse** false medical claims.
+- Claims simulate social media language: informal, noisy, emotional, and sometimes misspelled.
 
 ---
 
 ## 🛠️ Models
 
-### 🔹 Baseline Models
-- **TF-IDF + Naive Bayes**
-- **TF-IDF + Logistic Regression**
+### 🔸 Baseline Models (real data only)
+- TF-IDF + **Naive Bayes**
+- TF-IDF + **Logistic Regression**
 
-### 🔹 Transformer-Based Models
-- **BERT**
-- **BioBERT**
-- **RoBERTa**
+### 🔹 Transformer Models (real + synthetic)
+- **BERT** (`bert-base-uncased`)
+- **BioBERT** (`dmis-lab/biobert-base-cased-v1.1`)
+- **RoBERTa** (`roberta-base`)
 
-Transformer models were fine-tuned using HuggingFace `Trainer` on the merged dataset (real + synthetic).
+All models were fine-tuned using HuggingFace `Trainer`.
 
 ---
 
 ## 📈 Evaluation
 
-All models were evaluated using:
-
-- **Accuracy**, **Precision**, **Recall**, **F1-score**
-- **Confusion Matrix**
-- Stratified train-test splits were used for consistent evaluation.
-
-> 🔸 Baseline models were trained on real data only.  
-> 🔹 Advanced transformer models were trained on the full dataset including synthetic claims.
+- **Metrics**: Accuracy, Precision, Recall, F1-score, Confusion Matrix.
+- Models were evaluated on a **stratified test set**.
+- All transformer models were trained on **combined (real + synthetic)** datasets.
+- Baselines were trained on **real data only**.
 
 ---
 
-## 🧪 Results Summary
+## 📊 Results Summary
 
 | Model               | Accuracy | Precision | Recall | F1-score |
 |---------------------|----------|-----------|--------|----------|
@@ -73,25 +78,18 @@ All models were evaluated using:
 | BioBERT             | 0.860    | 0.862     | 0.859  | 0.860    |
 | RoBERTa             | **0.875**| **0.874** | **0.879** | **0.876** |
 
-> ✅ RoBERTa achieved the best overall performance.  
-> ⚠️ Baseline models struggled more with recall on the minority class ("False").
+---
+
+## 🧪 Key Insights
+
+- ✅ **RoBERTa** outperformed all other models across all metrics.
+- 🔬 Synthetic GPT-4 claims enhanced generalization and robustness.
+- ⚠️ Classical baselines underperformed, especially on identifying false claims.
+- 🔁 Real + synthetic data proved more effective than real-only setups.
 
 ---
 
-## ▶️ Notebooks Overview
-
-- `Synthetic_claims_generation_and_scoring.ipynb`  
-  ↪ Generates synthetic false claims using GPT-4-Turbo and evaluates them.
-
-- `Baseline_models.ipynb`  
-  ↪ Trains TF-IDF + Naive Bayes / Logistic Regression models on real claims.
-
-- `Advanced_models_BERT_BioBERT_RoBERTa.ipynb`  
-  ↪ Fine-tunes transformer models on real + synthetic claims and evaluates performance.
-
----
-
-## 🗂️ Folder Structure
+## 📁 Project Structure
 
 ```
 MedTruth/
@@ -126,10 +124,7 @@ MedTruth/
 
 ---
 
-## 💻 Running the Code
-
-You can run the notebooks either locally or in **Google Colab**.  
-All code was developed and tested in Google Colab ✅
+## 🚀 Quick Start
 
 ### 1. Clone the repository
 
@@ -144,9 +139,11 @@ cd MedTruth
 pip install -r requirements.txt
 ```
 
+### 3. Run notebooks in Google Colab or locally
+
 ---
 
-## 🧾 requirements.txt
+## 📦 Requirements
 
 ```
 transformers==4.52.4
@@ -170,7 +167,7 @@ openai>=1.30.5
 
 ## 🤝 Credits
 
-- GPT-4-Turbo API access via Azure OpenAI  
-- HuggingFace Transformers and Datasets  
-- Seaborn & Matplotlib for visualization  
-- Developed in Google Colab  
+- GPT-4-Turbo access via **Azure OpenAI**
+- Transformer fine-tuning via **HuggingFace**
+- Visualization with **Seaborn** and **Matplotlib**
+- Entire pipeline built in **Google Colab**
