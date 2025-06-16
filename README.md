@@ -60,6 +60,25 @@ All models were evaluated using:
 
 ---
 
+---
+
+---
+
+## 🧪 Results Summary
+
+| Model               | Accuracy | Precision | Recall | F1-score |
+|---------------------|----------|-----------|--------|----------|
+| Naive Bayes         | 0.77     | 0.78      | 0.75   | 0.75     |
+| Logistic Regression | 0.78     | 0.78      | 0.76   | 0.77     |
+| BERT                | 0.867    | 0.865     | 0.872  | 0.869    |
+| BioBERT             | 0.860    | 0.862     | 0.859  | 0.860    |
+| RoBERTa             | **0.875**| **0.874** | **0.879** | **0.876** |
+
+> 🔹 RoBERTa achieved the best overall performance.  
+> 🔸 Baseline models struggled more with recall on the minority class ("False").
+
+---
+
 ## 🗂️ Folder Structure
 
 ```
