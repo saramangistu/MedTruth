@@ -33,6 +33,21 @@ Only samples labeled as `True` or `False` were used.
 
 ---
 
+## 🧬 Dataset Fields
+
+### 📄 All training and evaluation datasets share the following structure:
+
+| Column  | Description |
+|---------|-------------|
+| `claim` | Text of the medical or health-related claim (real or synthetic) |
+| `label` | Ground-truth classification: either `True` or `False` |
+
+🧠 **Note**:  
+The file `final_GPTclaims.csv` contains only **synthetic false claims** that passed a quality score threshold.  
+It does **not** include a `label` column since all samples are implicitly labeled as `False`.
+
+---
+
 ## 🛠️ Models
 
 ### 🔹 Baseline Models
@@ -117,6 +132,16 @@ MedTruth/
 
 ---
 
+## 🧾 What's Inside?
+
+| Notebook | Description |
+|----------|-------------|
+| `notebooks/Synthetic_claims_generation_and_scoring.ipynb` | Generates synthetic **false medical claims** using GPT-4-Turbo and scores them across 5 criteria. Only high-scoring claims were retained. |
+| `notebooks/Baseline_models.ipynb` | Trains and evaluates baseline classifiers (**Naive Bayes**, **Logistic Regression**) using TF-IDF features on real labeled claims. |
+| `notebooks/Advanced_models_BERT_BioBERT_RoBERTa.ipynb` | Fine-tunes transformer models (**BERT**, **BioBERT**, **RoBERTa**) using HuggingFace on a combined dataset (real + synthetic). |
+
+---
+
 ## 💻 Running the Code
 
 You can run the notebooks either locally or in **Google Colab**.  
@@ -189,4 +214,4 @@ If you find this project helpful in your research or work, please consider citin
 - GPT-4-Turbo API access via Azure OpenAI  
 - HuggingFace Transformers and Datasets  
 - Seaborn & Matplotlib for visualization  
-- Developed in Google Colab  
+- Developed in Google Colab
