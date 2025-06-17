@@ -1,6 +1,31 @@
 # 🧬 MedTruth: Detecting Medical Misinformation on Social Media
 
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Made with Colab](https://img.shields.io/badge/Made%20with-Google%20Colab-orange)
+
 This project aims to detect and classify **true vs. false health-related claims** in the style of **social media posts** using **Natural Language Processing (NLP)** and **large language models (LLMs)**. The solution combines real-world labeled datasets with synthetically generated claims via GPT-4-Turbo to improve model generalization and robustness.
+
+---
+
+## 📚 Table of Contents
+
+- [Goal](#-goal)
+- [Visual Abstract](#-visual-abstract)
+- [Project Workflow](#-project-workflow)
+- [Datasets](#-datasets)
+- [Data Files Overview](#-data-files-overview)
+- [Dataset Fields](#-dataset-fields)
+- [Models](#-models)
+- [Evaluation](#-evaluation)
+- [Results Summary](#-results-summary)
+- [What's Inside?](#-whats-inside)
+- [Folder Structure](#-folder-structure)
+- [Running the Code](#-running-the-code)
+- [Requirements](#-requirements)
+- [Limitations and Future Work](#-limitations-and-future-work)
+- [Known Issues](#-known-issues)
+- [Citation](#-citation)
+- [Credits](#-credits)
 
 ---
 
@@ -15,6 +40,18 @@ This project aims to detect and classify **true vs. false health-related claims*
 ## 🖼️ Visual Abstract
 
 ![Visual Abstract](visual_abstract.png)
+
+---
+
+## 🔄 Project Workflow
+
+1. Load and clean real-world datasets.
+2. Merge all real claims into a unified training set.
+3. Generate synthetic false claims using GPT-4-Turbo (primed with COVID lies).
+4. Score synthetic claims and filter by quality.
+5. Merge real + synthetic data.
+6. Train baseline and transformer-based classifiers.
+7. Evaluate performance using standard metrics.
 
 ---
 
@@ -33,9 +70,19 @@ Only samples labeled as `True` or `False` were used.
 
 ---
 
+## 📁 Data Files Overview
+
+| File                              | Description |
+|-----------------------------------|-------------|
+| `final_GPTclaims.csv`             | Synthetic false claims (high quality). No label column — all assumed `False`. |
+| `dataset_final_baseline_data.csv`| Real claims for training/evaluation of baseline models. Includes `claim`, `label`. |
+| `dataset_final_advanced_data.csv`| Combined real + synthetic claims used for transformers. Includes `claim`, `label`. |
+
+---
+
 ## 🧬 Dataset Fields
 
-### 📄 All training and evaluation datasets share the following structure:
+All training and evaluation datasets share the following structure:
 
 | Column  | Description |
 |---------|-------------|
@@ -59,7 +106,7 @@ It does **not** include a `label` column since all samples are implicitly labele
 - **BioBERT**
 - **RoBERTa**
 
-All transformers were trained using HuggingFace `Trainer` on the merged dataset (real + synthetic).
+All transformer models were fine-tuned using HuggingFace `Trainer` on the merged dataset (real + synthetic).
 
 ---
 
@@ -89,6 +136,16 @@ Evaluations were performed on a stratified test split from the combined dataset.
 
 > 🔹 RoBERTa achieved the best overall performance.  
 > 🔸 Baseline models struggled more with recall on the minority class ("False").
+
+---
+
+## 🧾 What's Inside?
+
+| Notebook | Description |
+|----------|-------------|
+| `notebooks/Synthetic_claims_generation_and_scoring.ipynb` | Generates synthetic **false medical claims** using GPT-4-Turbo and scores them across 5 criteria. Only high-scoring claims were retained. |
+| `notebooks/Baseline_models.ipynb` | Trains and evaluates baseline classifiers (**Naive Bayes**, **Logistic Regression**) using TF-IDF features on real labeled claims. |
+| `notebooks/Advanced_models_BERT_BioBERT_RoBERTa.ipynb` | Fine-tunes transformer models (**BERT**, **BioBERT**, **RoBERTa**) using HuggingFace on a combined dataset (real + synthetic). |
 
 ---
 
@@ -131,16 +188,6 @@ MedTruth/
 
 ---
 
-## 🧾 What's Inside?
-
-| Notebook | Description |
-|----------|-------------|
-| `notebooks/Synthetic_claims_generation_and_scoring.ipynb` | Generates synthetic **false medical claims** using GPT-4-Turbo and scores them across 5 criteria. Only high-scoring claims were retained. |
-| `notebooks/Baseline_models.ipynb` | Trains and evaluates baseline classifiers (**Naive Bayes**, **Logistic Regression**) using TF-IDF features on real labeled claims. |
-| `notebooks/Advanced_models_BERT_BioBERT_RoBERTa.ipynb` | Fine-tunes transformer models (**BERT**, **BioBERT**, **RoBERTa**) using HuggingFace on a combined dataset (real + synthetic). |
-
----
-
 ## 💻 Running the Code
 
 You can run the notebooks either locally or in **Google Colab**.  
@@ -161,7 +208,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🧾 requirements.txt
+## 🧾 Requirements
 
 ```
 transformers==4.52.4
@@ -189,6 +236,14 @@ openai>=1.30.5
 - The current classification is binary (`True` / `False`). Incorporating a stance-aware or multi-class labeling scheme (e.g., "misleading", "partially false", "unverified") may improve granularity.
 - All content is in English. Multilingual support could expand the applicability to global misinformation detection.
 - Model evaluation was performed on balanced test sets. Real-world data may be skewed and require further adaptation strategies.
+
+---
+
+## 🛑 Known Issues
+
+- Some synthetic claims may unintentionally resemble real misinformation found online.
+- There is no medical expert review of the generated content.
+- Class distribution is balanced only artificially; real-world use may require domain adaptation.
 
 ---
 
