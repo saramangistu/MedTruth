@@ -22,8 +22,7 @@ This project aims to detect and classify **true vs. false health-related claims*
 - [Folder Structure](#-folder-structure)
 - [Running the Code](#-running-the-code)
 - [Requirements](#-requirements)
-- [Limitations and Future Work](#-limitations-and-future-work)
-- [Known Issues](#-known-issues)
+- [Limitations and Known Issues](#-limitations-and-known-issues)
 - [Citation](#-citation)
 - [Credits](#-credits)
 
@@ -230,19 +229,13 @@ openai>=1.30.5
 
 ---
 
-## 🚧 Limitations and Future Work
+## 🚧 Limitations and Known Issues
 
 - The synthetic dataset was generated using GPT-4-Turbo without expert medical validation. Future work could include manual annotation or filtering by healthcare professionals.
 - The current classification is binary (`True` / `False`). Incorporating a stance-aware or multi-class labeling scheme (e.g., "misleading", "partially false", "unverified") may improve granularity.
 - All content is in English. Multilingual support could expand the applicability to global misinformation detection.
 - Model evaluation was performed on balanced test sets. Real-world data may be skewed and require further adaptation strategies.
-
----
-
-## 🛑 Known Issues
-
 - Some synthetic claims may unintentionally resemble real misinformation found online.
-- There is no medical expert review of the generated content.
 - Class distribution is balanced only artificially; real-world use may require domain adaptation.
 
 ---
