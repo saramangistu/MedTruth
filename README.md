@@ -102,7 +102,6 @@ MedTruth/
 │   └── Advanced_models_BERT_BioBERT_RoBERTa.ipynb
 │
 ├── data/
-│   ├── claims_for_eval.csv
 │   ├── final_GPTclaims.csv
 │   ├── dataset_final_baseline_data.csv
 │   └── dataset_final_advanced_data.csv
